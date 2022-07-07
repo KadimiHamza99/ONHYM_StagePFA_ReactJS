@@ -22,9 +22,23 @@ class LoginForm extends Component{
                 refresh_token:response.data.refresh_token,
                 isAuth:true
             })
-            localStorage.setItem("access_token",response.data.access_token)
-            localStorage.setItem("refresh_token",response.data.refresh_token)
-          })
+            // localStorage.setItem("access_token",response.data.access_token)
+            // localStorage.setItem("refresh_token",response.data.refresh_token)
+
+            localStorage.setItem('access_token', JSON.stringify({
+                time: new Date(),
+                data: response.data.access_token
+            }))
+            localStorage.setItem('refresh_token', JSON.stringify({
+                time: new Date(),
+                data: response.data.refresh_token
+            }))
+            console.log(response.data.access_token)
+            setTimeout(function() {
+                localStorage.clear()
+                window.location.reload()
+            }, 1000*60*60)
+        })
     }
 
 
@@ -32,6 +46,7 @@ class LoginForm extends Component{
         return(
  
         <div className="form">
+   
             {
                 localStorage.getItem('access_token') && localStorage.getItem('refresh_token')
             ? 
