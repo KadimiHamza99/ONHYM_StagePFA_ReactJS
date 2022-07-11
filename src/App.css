@@ -1,0 +1,13 @@
+/*Login Page*/
+.grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+.logo{
+    margin: auto;
+}
+/*Footer*/
+.footer{
+    background-color: #F8F9FA;
+
+}

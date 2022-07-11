@@ -1,15 +1,15 @@
 import './App.css';
-import Main from './components/MainComponent';
-import {BrowserRouter} from 'react-router-dom'
+import { LoginContextProvider } from './context/LoginContext';
+import Main from './MainComponent';
 
 function App() {
   return (
+    
+    <LoginContextProvider>
     <div className="App">
-      
-      <BrowserRouter>
         <Main/>
-      </BrowserRouter>
     </div>
+    </LoginContextProvider>
   );
 }
 
