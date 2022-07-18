@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Button, FormGroup ,Form , Label , Input, Alert, Card, CardBody, CardTitle, CardText } from 'reactstrap'
 import { LoginContext } from '../context/LoginContext';
+import Header from './Header';
 
 const LoginForm = () => {
 
@@ -17,6 +18,7 @@ const LoginForm = () => {
 
     return (
         <div className="container grid">
+          
         <Card
     body
     
@@ -53,7 +55,7 @@ const LoginForm = () => {
       </CardText>
     </CardBody>
   </Card>
-  <picture class="logo">
+  <picture className="logo">
         <img width="200" src="onhym-logo.png" alt="" />
       </picture>
             
@@ -61,7 +63,7 @@ const LoginForm = () => {
     );
 };
 
-export default LoginForm;
+export default React.memo(LoginForm)
 
 
 
