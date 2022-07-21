@@ -7,8 +7,8 @@ const Home = () => {
       return <LoginForm />
     }
     return ( 
-        <div>
-            Home : {localStorage.getItem("username")} - {localStorage.getItem("grade")} - {localStorage.getItem("access_token")}
+        <div className='container'>
+            Cet espace est confidentiel et reservé aux employés de l'ONHYM
               {/* {JSON.stringify(demandesAM)} */}
   {/* <Card
   >

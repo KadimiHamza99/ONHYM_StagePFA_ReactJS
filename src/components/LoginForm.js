@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Button, FormGroup ,Form , Label , Input, Alert, Card, CardBody, CardTitle, CardText } from 'reactstrap'
 import { LoginContext } from '../context/LoginContext';
-import Header from './Header';
 
 const LoginForm = () => {
 

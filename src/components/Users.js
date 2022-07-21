@@ -84,11 +84,13 @@ const Users = () => {
                 <td>{user.email}</td>
                 <td>{user.createdDate}</td>
                 <td>{user.roles.map((role) => <Badge style={{ margin: '1px' }}>{role.name}</Badge>)}</td>
-                <td>{user.manager === null ? <>-</> : <>{user.manager.username}</>}</td>
-                <td>{user.manager === null ? <>-</> : <>{user.dsi.username}</>}</td>
-                <td>{user.state === 1 ? <Badge color='success'>actif</Badge> : <Badge color='danger'>passif</Badge>}</td>
+                <td>{user.manager ? user.manager.username : <>-</>}</td>
+                <td>{user.dsi ? user.dsi.username : <>-</>}</td>
+                <td>{user.state === 1 ? <Badge color='success'>en service</Badge> : <Badge color='danger'>pas en service</Badge>}</td>
                 <td>{user.stateDate}</td>
+                { user.username === "ADMIN" ? <td></td> :
                 <td><Link to={`/admin/users/${user.userId}`}>Modifier</Link></td>
+                }
             </tr>
         )
     })
@@ -104,8 +106,8 @@ const Users = () => {
                         <th>Email</th>
                         <th>Date de creation</th>
                         <th>Roles</th>
-                        <th>Manager</th>
-                        <th>Dpi</th>
+                        <th>Chef de Division</th>
+                        <th>DPI</th>
                         <th>Etat</th>
                         <th>Date de modification</th>
                         <th>Gestion</th>
