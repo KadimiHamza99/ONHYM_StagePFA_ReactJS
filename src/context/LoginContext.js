@@ -13,11 +13,15 @@ export const LoginContextProvider = ({children}) => {
             .then((response) => {
                 const token = response.data.access_token
                 const decoded = jwtDecode(token)
-                if(decoded.roles.find(element => element === "DPI")){
-                    localStorage.setItem("grade","DPI")
+                if(decoded.roles.find(element => element === "ADMIN")){
+                    localStorage.setItem("grade","ADMIN")
+                }else if(decoded.roles.find(element => element === "DSI")){
+                    localStorage.setItem("grade","DSI")
                 }else if(decoded.roles.find(element => element === "DEMANDEUR")){
                     if(decoded.roles.find(element => element === "MANAGER")){
                         localStorage.setItem("grade","MANAGER")
+                    }else if(decoded.roles.find(element => element === "DPI")){
+                        localStorage.setItem("grade","DPI")
                     }else{
                         localStorage.setItem("grade","DEMANDEUR")
                     }

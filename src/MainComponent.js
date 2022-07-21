@@ -14,6 +14,9 @@ import ManagerAttenteAM from "./components/ManagerAttenteAM";
 import ManagerAttenteSI from "./components/ManagerAttenteSI";
 import DemandesRefusesAm from "./components/DemandesRefusesAm";
 import DemandesRefusesSi from "./components/DemandesRefusesSi";
+import ChangePassword from "./components/ChangePassword";
+import Users from "./components/Users";
+import UsersUpdate from "./components/UsersUpdate";
 
 class Main extends Component {
 
@@ -33,6 +36,11 @@ class Main extends Component {
                             <Route exact path="/manager/attente/demandesSI" element={<ManagerAttenteSI />} />
                             <Route exact path="/demandes-Refuses/am" element={<DemandesRefusesAm />} />
                             <Route exact path="/demandes-Refuses/si" element={<DemandesRefusesSi />} />
+
+                            <Route exact path="/configuration" element={<ChangePassword/>} />
+                            <Route exact path="/admin/users" element={<Users/>} />
+                            <Route path='/admin/users/:userId' element={<UsersUpdate/>}></Route>                            
+
                             <Route path="/*" element={<Error />} />
                         </Routes>
                         {/* <Footer /> */}

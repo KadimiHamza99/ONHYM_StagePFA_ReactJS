@@ -19,6 +19,13 @@ export const DataContextProvider = ({ children }) => {
         ErrMsg: ""
     })
 
+    const [users, setUsers] = useState({
+        data: [],
+        isLoading: true,
+        isError: false,
+        ErrMsg: ""
+    })
+
     useLayoutEffect(() => {
         var config = {
             headers: { "Authorization": "Bearer " + localStorage.getItem("access_token") }
@@ -55,12 +62,29 @@ export const DataContextProvider = ({ children }) => {
                     ErrMsg: error.message
                 }))
             })
+        axios.get('http://localhost:8000/configuration/admin/getUsers', config)
+            .then((response) => {
+                setUsers((prevState) => ({
+                    ...prevState,
+                    isLoading: false,
+                    data: response.data
+                }))
+            })
+            .catch((error) => {
+                setUsers((prevState) => ({
+                    ...prevState,
+                    isLoading: false,
+                    isError: true,
+                    ErrMsg: error.message
+                }))
+            })
     }, [])
 
 
     const value = {
         demandesAM, setDemandesAM,
-        demandesSI, setDemandesSI
+        demandesSI, setDemandesSI,
+        users, setUsers
     }
 
     return (

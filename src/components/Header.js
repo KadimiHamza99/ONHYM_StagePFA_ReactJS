@@ -95,7 +95,7 @@ const Header = () => {
                                     <DropdownMenu end>
                                         <NavItem>
                                             <DropdownItem href='/demandes-Refuses/am'>
-                                                <span className=''></span> Acces Messagerie 
+                                                <span className=''></span> Acces Messagerie
                                             </DropdownItem>
                                         </NavItem>
                                         <NavItem>
@@ -134,13 +134,29 @@ const Header = () => {
                                 </UncontrolledDropdown>
                             </> : <></>
                     }
+
+                    {localStorage.getItem("grade") === "ADMIN" ?
+                        <>
+                            <NavItem>
+                                <NavLink href='/admin/users'>
+                                    <span></span> Gestion des utilisateurs
+                                </NavLink>
+                            </NavItem>
+                        </>
+                        : <></>
+                    }
                 </Nav>
 
                 <NavbarText>
                     {localStorage.getItem("isAuth") ?
-                        <a href='/' onClick={logout}>
-                            <span className='fa fa-logout fa-lg' style={{ color: '#E22525', fontSize: '14px' }}>Deconnexion</span>
-                        </a>
+                        <>
+                            <a href='/configuration'>
+                                <span style={{ color: '#265fd3', fontSize: '14px', marginRight: '10px' }}>Mot de passe</span>
+                            </a>
+                            <a href='/' onClick={logout}>
+                                <span style={{ color: '#E22525', fontSize: '14px' }}>Deconnexion</span>
+                            </a>
+                        </>
                         : <></>
                     }
                 </NavbarText>
