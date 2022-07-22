@@ -49,7 +49,7 @@ const AllDemandesSi = () => {
         return (
             <tr key={demande.idDemandeServiceSi}>
                 <th>{demande.idDemandeServiceSi}</th>
-                <td>{demande.nom} {demande.prenom}</td>
+                <td>{demande.demandeur.username}</td>
                 <td>{demande.societe}</td>
                 <td>{demande.serviceDemande}</td>
                 <td>{demande.dateDemande}</td>

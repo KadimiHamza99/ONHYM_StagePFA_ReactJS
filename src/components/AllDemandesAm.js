@@ -44,7 +44,7 @@ const AllDemandesAm = () => {
         return (
             <tr key={demande.idDemandeAccesMessagerie}>
                 <th>{demande.idDemandeAccesMessagerie}</th>
-                <td>{demande.nom} {demande.prenom}</td>
+                <td>{demande.demandeur.username}</td>
                 <td>{demande.matricule}</td>
                 <td>{demande.dateDemande}</td>
                 <td>

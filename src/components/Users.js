@@ -89,7 +89,7 @@ const Users = () => {
                 <td>{user.state === 1 ? <Badge color='success'>en service</Badge> : <Badge color='danger'>pas en service</Badge>}</td>
                 <td>{user.stateDate}</td>
                 { user.username === "ADMIN" ? <td></td> :
-                <td><Link to={`/admin/users/${user.userId}`}>Modifier</Link></td>
+                <td><Button color='link' size='sm'><Link to={`/admin/users/${user.userId}`}>Modifier</Link></Button></td>
                 }
             </tr>
         )

@@ -64,13 +64,13 @@ const Header = () => {
                                     </DropdownToggle>
                                     <DropdownMenu end>
                                         <NavItem>
-                                            <DropdownItem href="/manager/attente/demandesAM">
+                                            <DropdownItem href="/validation/am">
                                                 <span className=''></span>Acces Messagerie
                                             </DropdownItem>
                                         </NavItem>
 
                                         <NavItem>
-                                            <DropdownItem href="/manager/attente/demandesSI">
+                                            <DropdownItem href="/validation/si">
                                                 <span className=''></span>Services SI
                                             </DropdownItem>
                                         </NavItem>
@@ -94,7 +94,7 @@ const Header = () => {
                                     <DropdownMenu end
                                     >
                                         <NavItem>
-                                            <DropdownItem href="/dsi/attente/demandesAM">
+                                            <DropdownItem href="/validation/am">
                                                 <span className=''></span>En Attente
                                             </DropdownItem>
                                         </NavItem>
@@ -115,7 +115,7 @@ const Header = () => {
                                     </DropdownToggle>
                                     <DropdownMenu end>
                                         <NavItem>
-                                            <DropdownItem href="/dsi/attente/demandesSI">
+                                            <DropdownItem href="/validation/si">
                                                 <span className=''></span>En Attente
                                             </DropdownItem>
                                         </NavItem>
