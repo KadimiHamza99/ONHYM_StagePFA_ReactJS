@@ -7,23 +7,81 @@ const Header = () => {
 
     return (
         <div>
-            <Navbar
-                color="light"
-                expand="md"
-                light
-            >
+            <Navbar color="light" expand="md" light>
                 <NavbarBrand href="/">
                     <img src="/images/logo.png" height="70" width="100" alt="ONHYM LOGO" />
                 </NavbarBrand>
 
-                <Nav
-                    className="me-auto"
-                    navbar
-                    style={{ marginLeft: '10em' }}
-                >
+                <Nav className="me-auto" navbar style={{ marginLeft: '10em' }}>
                     {
-                        localStorage.getItem("grade") === "DPI" &&
-                            localStorage.getItem("isAuth") ?
+                        localStorage.getItem("roles").includes("DEMANDEUR") ?
+                            <>
+                                <NavItem>
+                                    <NavLink href=''>
+                                        <span className=''></span> Demande Acces Messagerie
+                                    </NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href=''>
+                                        <span className=''></span> Demande Service SI
+                                    </NavLink>
+                                </NavItem>
+                                <UncontrolledDropdown>
+                                    <DropdownToggle
+                                        caret
+                                        nav
+                                    >
+                                        Demandes Refusés
+                                    </DropdownToggle>
+                                    <DropdownMenu end>
+                                        <NavItem>
+                                            <DropdownItem href='/demandes-Refuses/am'>
+                                                <span className=''></span> Acces Messagerie
+                                            </DropdownItem>
+                                        </NavItem>
+                                        <NavItem>
+                                            <DropdownItem href='/demandes-Refuses/si'>
+                                                <span className=''></span> Services SI
+                                            </DropdownItem>
+                                        </NavItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </>
+                            : <></>
+                    }
+
+                    {
+                        (localStorage.getItem("roles").includes("DPI")
+                            || localStorage.getItem("roles").includes("MANAGER"))
+                            && localStorage.getItem("isAuth") ?
+                            <>
+                                <UncontrolledDropdown>
+                                    <DropdownToggle
+                                        caret
+                                        nav
+                                    >
+                                        Demandes en Attentes
+                                    </DropdownToggle>
+                                    <DropdownMenu end>
+                                        <NavItem>
+                                            <DropdownItem href="/manager/attente/demandesAM">
+                                                <span className=''></span>Acces Messagerie
+                                            </DropdownItem>
+                                        </NavItem>
+
+                                        <NavItem>
+                                            <DropdownItem href="/manager/attente/demandesSI">
+                                                <span className=''></span>Services SI
+                                            </DropdownItem>
+                                        </NavItem>
+                                    </DropdownMenu>
+                                </UncontrolledDropdown>
+                            </>
+                            : <></>
+                    }
+
+                    {
+                        localStorage.getItem("roles").includes("DSI") && localStorage.getItem("isAuth") ?
                             <>
                                 <UncontrolledDropdown>
                                     <DropdownToggle
@@ -68,96 +126,36 @@ const Header = () => {
                                         </NavItem>
                                     </DropdownMenu>
                                 </UncontrolledDropdown>
-                            </> : <></>
-                    }
-                    {
-                        (localStorage.getItem("grade") === "MANAGER" ||
-                            localStorage.getItem("grade") === "DEMANDEUR") &&
-                            localStorage.getItem("isAuth") ?
-                            <>
-                                <NavItem>
-                                    <NavLink href=''>
-                                        <span className=''></span> Demande Acces Messagerie
-                                    </NavLink>
-                                </NavItem>
-                                <NavItem>
-                                    <NavLink href=''>
-                                        <span className=''></span> Demande Service SI
-                                    </NavLink>
-                                </NavItem>
-                                <UncontrolledDropdown>
-                                    <DropdownToggle
-                                        caret
-                                        nav
-                                    >
-                                        Demandes Refusés
-                                    </DropdownToggle>
-                                    <DropdownMenu end>
-                                        <NavItem>
-                                            <DropdownItem href='/demandes-Refuses/am'>
-                                                <span className=''></span> Acces Messagerie
-                                            </DropdownItem>
-                                        </NavItem>
-                                        <NavItem>
-                                            <DropdownItem href='/demandes-Refuses/si'>
-                                                <span className=''></span> Services SI
-                                            </DropdownItem>
-                                        </NavItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </> : <></>
-                    }
-                    {
-                        localStorage.getItem("grade") === "MANAGER" &&
-                            localStorage.getItem("isAuth") ?
-                            <>
-                                <UncontrolledDropdown>
-                                    <DropdownToggle
-                                        caret
-                                        nav
-                                    >
-                                        Demandes en Attentes
-                                    </DropdownToggle>
-                                    <DropdownMenu end>
-                                        <NavItem>
-                                            <DropdownItem href="/manager/attente/demandesAM">
-                                                <span className=''></span>Acces Messagerie
-                                            </DropdownItem>
-                                        </NavItem>
-
-                                        <NavItem>
-                                            <DropdownItem href="/manager/attente/demandesSI">
-                                                <span className=''></span>Services SI
-                                            </DropdownItem>
-                                        </NavItem>
-                                    </DropdownMenu>
-                                </UncontrolledDropdown>
-                            </> : <></>
+                            </>
+                            : <></>
                     }
 
-                    {localStorage.getItem("grade") === "ADMIN" ?
-                        <>
-                            <NavItem>
-                                <NavLink href='/admin/users'>
-                                    <span></span> Gestion des utilisateurs
-                                </NavLink>
-                            </NavItem>
-                        </>
-                        : <></>
+                    {
+                        localStorage.getItem("roles").includes("ADMIN") && localStorage.getItem("isAuth") ?
+                            <>
+                                <NavItem>
+                                    <NavLink href='/admin/users'>
+                                        <span></span> Gestion des utilisateurs
+                                    </NavLink>
+                                </NavItem>
+                            </>
+                            : <></>
                     }
+
                 </Nav>
 
                 <NavbarText>
-                    {localStorage.getItem("isAuth") ?
-                        <>
-                            <a href='/configuration'>
-                                <span style={{ color: '#265fd3', fontSize: '14px', marginRight: '10px' }}>Mot de passe</span>
-                            </a>
-                            <a href='/' onClick={logout}>
-                                <span style={{ color: '#E22525', fontSize: '14px' }}>Deconnexion</span>
-                            </a>
-                        </>
-                        : <></>
+                    {
+                        localStorage.getItem("isAuth") ?
+                            <>
+                                <a href='/configuration'>
+                                    <span style={{ color: '#265fd3', fontSize: '14px', marginRight: '10px' }}>Mot de passe</span>
+                                </a>
+                                <a href='/' onClick={logout}>
+                                    <span style={{ color: '#E22525', fontSize: '14px' }}>Deconnexion</span>
+                                </a>
+                            </>
+                            : <></>
                     }
                 </NavbarText>
             </Navbar>

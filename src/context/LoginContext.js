@@ -13,20 +13,23 @@ export const LoginContextProvider = ({children}) => {
             .then((response) => {
                 const token = response.data.access_token
                 const decoded = jwtDecode(token)
+                const roles = []
                 if(decoded.roles.find(element => element === "ADMIN")){
-                    localStorage.setItem("grade","ADMIN")
-                }else if(decoded.roles.find(element => element === "DSI")){
-                    localStorage.setItem("grade","DSI")
-                }else if(decoded.roles.find(element => element === "DEMANDEUR")){
-                    if(decoded.roles.find(element => element === "MANAGER")){
-                        localStorage.setItem("grade","MANAGER")
-                    }else if(decoded.roles.find(element => element === "DPI")){
-                        localStorage.setItem("grade","DPI")
-                    }else{
-                        localStorage.setItem("grade","DEMANDEUR")
-                    }
+                    roles.push("ADMIN")
                 }
-                
+                if(decoded.roles.find(element => element === "DSI")){
+                    roles.push("DSI")
+                }
+                if(decoded.roles.find(element => element === "DPI")){
+                    roles.push("DPI")
+                }
+                if(decoded.roles.find(element => element === "MANAGER")){
+                    roles.push("MANAGER")
+                }
+                if(decoded.roles.find(element => element === "DEMANDEUR")){
+                    roles.push("DEMANDEUR")
+                }
+                localStorage.setItem("roles",JSON.stringify(roles))
                 localStorage.setItem("username",decoded.sub)
                 localStorage.setItem("access_token",response.data.access_token)
                 localStorage.setItem("refresh_token",response.data.refresh_token)
@@ -40,6 +43,7 @@ export const LoginContextProvider = ({children}) => {
 
     const logout = () => {
         localStorage.clear()
+        localStorage.setItem("roles",JSON.stringify([]))
         window.location.reload()
     }
 
