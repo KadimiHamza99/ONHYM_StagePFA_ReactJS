@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Nav, Navbar, NavbarBrand, NavItem, DropdownItem, DropdownMenu, DropdownToggle, NavbarText, UncontrolledDropdown, NavLink } from 'reactstrap';
+import { Nav, Navbar, NavbarBrand, NavItem, DropdownItem, DropdownMenu, DropdownToggle, NavbarText, UncontrolledDropdown, NavLink, Button } from 'reactstrap';
 import { LoginContext } from '../context/LoginContext';
 
 const Header = () => {
@@ -17,12 +17,12 @@ const Header = () => {
                         localStorage.getItem("roles").includes("DEMANDEUR") ?
                             <>
                                 <NavItem>
-                                    <NavLink href=''>
+                                    <NavLink href='/demandesAM'>
                                         <span className=''></span> Demande Acces Messagerie
                                     </NavLink>
                                 </NavItem>
                                 <NavItem>
-                                    <NavLink href=''>
+                                    <NavLink href='/demandesSI'>
                                         <span className=''></span> Demande Service SI
                                     </NavLink>
                                 </NavItem>
@@ -35,12 +35,12 @@ const Header = () => {
                                     </DropdownToggle>
                                     <DropdownMenu end>
                                         <NavItem>
-                                            <DropdownItem href='/demandes-Refuses/am'>
+                                            <DropdownItem href='/refus/am'>
                                                 <span className=''></span> Acces Messagerie
                                             </DropdownItem>
                                         </NavItem>
                                         <NavItem>
-                                            <DropdownItem href='/demandes-Refuses/si'>
+                                            <DropdownItem href='/refus/si'>
                                                 <span className=''></span> Services SI
                                             </DropdownItem>
                                         </NavItem>
@@ -149,7 +149,7 @@ const Header = () => {
                         localStorage.getItem("isAuth") ?
                             <>
                                 <a href='/configuration'>
-                                    <span style={{ color: '#265fd3', fontSize: '14px', marginRight: '10px' }}>Mot de passe</span>
+                                    <span style={{ color: '#265fd3', fontSize: '14px', marginRight: '10px'}}>Mot de passe</span>
                                 </a>
                                 <a href='/' onClick={logout}>
                                     <span style={{ color: '#E22525', fontSize: '14px' }}>Deconnexion</span>

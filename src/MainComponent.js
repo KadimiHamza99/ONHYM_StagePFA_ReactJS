@@ -15,6 +15,11 @@ import DemandeAMDetails from "./components/DemandeAMDetails";
 import DemandeSIDetails from "./components/DemandeSIDetails";
 import ValidationAM from "./components/ValidationAM";
 import ValidationSI from "./components/ValidationSI";
+import RefusAM from "./components/RefusAM";
+import RefusSI from "./components/RefusSI";
+import UserDemandesAM from "./components/UserDemandesAM";
+import UserDemandesSI from "./components/UserDemandesSI";
+import Politique from "./components/Politique";
 
 class Main extends Component {
 
@@ -34,6 +39,14 @@ class Main extends Component {
                             
                             <Route exact path="/validation/am" element={<ValidationAM />}/>
                             <Route exact path="/validation/si" element={<ValidationSI />}/>
+
+                            <Route exact path="/refus/am" element={<RefusAM/>}/>
+                            <Route exact path="/refus/si" element={<RefusSI/>}/>
+
+                            <Route exact path="/demandesAM" element={<UserDemandesAM />}/>
+                            <Route exact path="/demandesSI" element={<UserDemandesSI />}/>
+
+                            <Route exact path="/politique" element={<Politique />}/>
 
                             {/* <Route exact path="/dsi/attente/demandesAM" element={<DsiAttenteAM />} />
                             <Route exact path="/dsi/attente/demandesSI" element={<DsiAttenteSI />} />

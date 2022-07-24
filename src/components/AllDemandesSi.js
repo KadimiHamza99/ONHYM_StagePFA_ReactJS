@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useContext } from 'react';
 import { DataContext } from '../context/DataContext';
-import { Alert, Badge, Button, Table } from 'reactstrap';
+import { Alert, Badge, Button, Input, Table } from 'reactstrap';
 import Loading from './Loading';
 import LoginForm from './LoginForm';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,8 @@ import axios from 'axios';
 const AllDemandesSi = () => {
 
     const { demandesSI } = useContext(DataContext)
+
+    const [state, setState] = useState("")
 
     const download = (id,etat) => {
         var filename = etat=== -1 ? id+".pdf" : etat===0 ? id+"ManagerValidation.pdf" : id+"DsiValidation.pdf"
@@ -45,7 +47,9 @@ const AllDemandesSi = () => {
             {demandesSI.ErrMsg}
         </Alert>)
     }
-    const renderDemandes = demandesSI.data.map((demande) => {
+    const renderDemandes = demandesSI.data
+    .filter((demande) => state.length > 0 ? demande.idDemandeServiceSi.startsWith(state) || demande.demandeur.username.startsWith(state) || demande.dateDemande.startsWith(state) : demande)
+    .map((demande) => {
         return (
             <tr key={demande.idDemandeServiceSi}>
                 <th>{demande.idDemandeServiceSi}</th>
@@ -75,7 +79,10 @@ const AllDemandesSi = () => {
     })
     return (
         <div className='container'>
-            <Table bordered style={{ marginTop: '3em' }}>
+            <Input style={{width:'36.5%',marginTop:'5px'}} type="search" name="search" id='search'
+                value={state} onChange={(e) => setState(e.target.value)}
+                placeholder='chercher une demande par date/nom/id ...' />
+            <Table bordered>
                 <thead>
                     <tr>
                         <th>Id</th>

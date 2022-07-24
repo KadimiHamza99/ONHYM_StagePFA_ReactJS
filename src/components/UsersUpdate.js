@@ -67,7 +67,9 @@ const UsersUpdate = () => {
             })
     }, [])
 
-    const getUsers = users.data.map((user) => {
+    const getUsers = users.data
+    .filter((user) => user.username!==current.username )
+    .map((user) => {
         return (
             <option key={user.userId} value={user.username}>Mme./Mr {user.username}</option>
         )

@@ -87,7 +87,7 @@ const DemandeSIDetails = () => {
                             <ListGroupItem>
                                 Service Demandé : <br /><b>{demandeDetails.data.serviceDemande}</b>
                             </ListGroupItem>
-                            <ListGroupItem>
+                            <ListGroupItem style={{width:"370px"}}>
                                 Précision : <br /><b>{demandeDetails.data.precisionServiceDemande ? demandeDetails.data.precisionServiceDemande : <>-</>}</b>
                             </ListGroupItem>
                             <ListGroupItem>
@@ -100,15 +100,6 @@ const DemandeSIDetails = () => {
                                         : demandeDetails.data.etatDemande === 1 ? <Badge color='success'>validé</Badge>
                                             : <>-</>
                                 }
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                Refuser : <br />
-                                {
-                                    demandeDetails.data.refuser ? <Badge color='danger'>Oui</Badge> : <Badge color='success'>Non</Badge>
-                                }
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                refuseur :  <br /><b>{demandeDetails.data.refuseur ? demandeDetails.data.refuseur : <>-</>}</b>
                             </ListGroupItem>
                         </ListGroup>
                         <ListGroup
@@ -125,6 +116,15 @@ const DemandeSIDetails = () => {
                             </ListGroupItem>
                             <ListGroupItem>
                                 deuxiéme validation : <br /><b>{demandeDetails.data.dateValidationDsi ? demandeDetails.data.dateValidationDsi : <>-</>}</b>
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                Refuser : <br />
+                                {
+                                    demandeDetails.data.refuser ? <Badge color='danger'>Oui</Badge> : <Badge color='success'>Non</Badge>
+                                }
+                            </ListGroupItem>
+                            <ListGroupItem>
+                                refuseur :  <br /><b>{demandeDetails.data.refuseur ? demandeDetails.data.refuseur : <>-</>}</b>
                             </ListGroupItem>
                         </ListGroup>
 
