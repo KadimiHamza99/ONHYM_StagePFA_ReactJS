@@ -2,20 +2,22 @@ import axios from 'axios';
 import React, { useLayoutEffect, useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Badge, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Alert } from 'reactstrap';
+import { Table, Badge, Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Alert, FormText, ModalFooter } from 'reactstrap';
 import { DataContext } from '../context/DataContext';
+import Loading from './Loading';
+import LoginForm from './LoginForm';
 
 const Users = () => {
 
-    const {users,setUsers} = useContext(DataContext)
+    const { users, setUsers } = useContext(DataContext)
 
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
+    const [password, setPassword] = useState("1949")
 
-    const [add,setAdd] = useState({
-        isError:false,
-        isSuccess:false
+    const [add, setAdd] = useState({
+        isError: false,
+        isSuccess: false
     })
 
     const [modal, setModal] = useState(false)
@@ -55,23 +57,23 @@ const Users = () => {
             }
             var body = {
                 username: username,
-                email:email,
-                password:password
+                email: email,
+                password: password
             }
-            axios.post("http://localhost:8000/configuration/admin/createUser", body,config)
-                .then((response)=>{
+            axios.post("http://localhost:8000/configuration/admin/createUser", body, config)
+                .then((response) => {
                     setAdd((prevState) => ({
                         ...prevState,
-                        isSuccess:true
+                        isSuccess: true
                     }))
                 })
-                .catch((error)=>{
+                .catch((error) => {
                     setAdd((prevState) => ({
                         ...prevState,
-                        isError:true
+                        isError: true
                     }))
                 })
-                window.location.reload()
+            window.location.reload()
         }
     }
 
@@ -88,16 +90,23 @@ const Users = () => {
                 <td>{user.dsi ? user.dsi.username : <>-</>}</td>
                 <td>{user.state === 1 ? <Badge color='success'>en service</Badge> : <Badge color='danger'>pas en service</Badge>}</td>
                 <td>{user.stateDate}</td>
-                { user.username === "ADMIN" ? <td></td> :
-                <td><Button color='link' size='sm'><Link to={`/admin/users/${user.userId}`}>Modifier</Link></Button></td>
+                {user.username === "ADMIN" ? <td></td> :
+                    <td><Button color='link' size='sm'><Link to={`/admin/users/${user.userId}`}>Modifier</Link></Button></td>
                 }
             </tr>
         )
     })
 
+    if (!localStorage.getItem("isAuth") && !localStorage.getItem('roles').includes("ADMIN")) {
+        return <LoginForm />
+    }
+    if (users.isLoading) {
+        return <Loading />
+    }
+
     return (
         <div className='container'>
-            <Button color='primary' size='sm' onClick={toggle}>Ajouter</Button>
+            <Button color='primary' size='sm' style={{marginTop:'2em'}} onClick={toggle}>Ajouter</Button>
             <Table bordered>
                 <thead>
                     <tr>
@@ -142,9 +151,15 @@ const Users = () => {
                                 value={password} onChange={(e) => setPassword(e.target.value)}
                             />
                         </FormGroup>
-                        <Button type='submit' color='primary'>Changer votre mot de passe</Button>
+                        <Button type='submit' color='primary'>Ajouter un nouveau utilisateur</Button>
                     </Form>
                 </ModalBody>
+                <ModalFooter>
+                    <FormText>
+                        Attention vous n'avez pas le droit de changer le nom de l'utilisateur par la suite
+                        soyez prudent dans votre choix ,un mot de passe est saisi par defaut <cite>´1949´</cite> .
+                    </FormText>
+                </ModalFooter>
             </Modal>
 
 

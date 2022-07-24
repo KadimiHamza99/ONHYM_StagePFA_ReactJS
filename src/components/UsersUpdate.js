@@ -1,9 +1,11 @@
 import axios from 'axios';
 import React, { useContext, useLayoutEffect, useState } from 'react';
 import { useParams } from 'react-router-dom'
-import { Alert, Button, Card, CardBody, CardFooter, CardText, CardTitle, Form, FormGroup, Input, Label } from 'reactstrap';
+import { Alert, Button, Card, CardBody, CardText, CardTitle, Form, FormGroup, Input, Label } from 'reactstrap';
 import { DataContext } from '../context/DataContext';
 import { MultiSelect } from "react-multi-select-component";
+import Loading from './Loading';
+import LoginForm from './LoginForm';
 
 var LocalDate = require("@js-joda/core").LocalDate;
 
@@ -68,12 +70,12 @@ const UsersUpdate = () => {
     }, [])
 
     const getUsers = users.data
-    .filter((user) => user.username!==current.username )
-    .map((user) => {
-        return (
-            <option key={user.userId} value={user.username}>Mme./Mr {user.username}</option>
-        )
-    })
+        .filter((user) => user.username !== current.username)
+        .map((user) => {
+            return (
+                <option key={user.userId} value={user.username}>Mme./Mr {user.username}</option>
+            )
+        })
 
     const handleUpdate = (e) => {
         e.preventDefault()
@@ -88,8 +90,8 @@ const UsersUpdate = () => {
             var config = {
                 headers: { "Authorization": "Bearer " + localStorage.getItem("access_token") },
             }
-            var body={}
-            if(current.dsi==="null" && current.manager==="null"){
+            var body = {}
+            if (current.dsi === "null" && current.manager === "null") {
                 body = {
                     "username": current.username,
                     "email": current.email,
@@ -98,33 +100,33 @@ const UsersUpdate = () => {
                     "stateDate": LocalDate.now().toString()
                 }
                 console.log(body);
-            }else if(current.dsi==="null"){
+            } else if (current.dsi === "null") {
                 body = {
                     "username": current.username,
                     "email": current.email,
                     "roles": roles,
-                    "manager":current.manager,
+                    "manager": current.manager,
                     "state": current.state,
                     "stateDate": LocalDate.now().toString()
                 }
                 console.log(body);
-            }else if(current.manager==="null"){
+            } else if (current.manager === "null") {
                 body = {
                     "username": current.username,
                     "email": current.email,
                     "roles": roles,
-                    "dsi":current.dsi,
+                    "dsi": current.dsi,
                     "state": current.state,
                     "stateDate": LocalDate.now().toString()
                 }
                 console.log(body);
-            }else{
+            } else {
                 body = {
                     "username": current.username,
                     "email": current.email,
                     "roles": roles,
-                    "dsi":current.dsi,
-                    "manager":current.manager,
+                    "dsi": current.dsi,
+                    "manager": current.manager,
                     "state": current.state,
                     "stateDate": LocalDate.now().toString()
                 }
@@ -144,6 +146,13 @@ const UsersUpdate = () => {
                     })
                 })
         }
+    }
+
+    if (!localStorage.getItem("isAuth") && !localStorage.getItem('roles').includes("ADMIN")) {
+        return <LoginForm/>
+    }
+    if (users.isLoading) {
+        return <Loading />
     }
 
     return (

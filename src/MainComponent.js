@@ -34,9 +34,10 @@ class Main extends Component {
 
                             <Route exact path="/dsi/demandesAM" element={<AllDemandesAm />} />
                             <Route exact path="/dsi/demandesSI" element={<AllDemandesSi />} />
+
                             <Route exact path='/demandesAM/details/:demandeId' element={<DemandeAMDetails />} />
                             <Route exact path='/demandesSI/details/:demandeId' element={<DemandeSIDetails />} />
-                            
+
                             <Route exact path="/validation/am" element={<ValidationAM />}/>
                             <Route exact path="/validation/si" element={<ValidationSI />}/>
 
@@ -46,22 +47,15 @@ class Main extends Component {
                             <Route exact path="/demandesAM" element={<UserDemandesAM />}/>
                             <Route exact path="/demandesSI" element={<UserDemandesSI />}/>
 
-                            <Route exact path="/politique" element={<Politique />}/>
-
-                            {/* <Route exact path="/dsi/attente/demandesAM" element={<DsiAttenteAM />} />
-                            <Route exact path="/dsi/attente/demandesSI" element={<DsiAttenteSI />} />
-                            <Route exact path="/manager/attente/demandesAM" element={<ManagerAttenteAM />} />
-                            <Route exact path="/manager/attente/demandesSI" element={<ManagerAttenteSI />} />
-                            <Route exact path="/demandes-Refuses/am" element={<DemandesRefusesAm />} />
-                            <Route exact path="/demandes-Refuses/si" element={<DemandesRefusesSi />} /> */}
 
                             <Route exact path="/configuration" element={<ChangePassword />} />
                             <Route exact path="/admin/users" element={<Users />} />
                             <Route path='/admin/users/:userId' element={<UsersUpdate />}></Route>
 
+                            <Route exact path="/politique" element={<Politique />}/>
+
                             <Route path="/*" element={<Error />} />
                         </Routes>
-                        {/* <Footer /> */}
                     </BrowserRouter>
                 </DataContextProvider>
             </LoginContextProvider>

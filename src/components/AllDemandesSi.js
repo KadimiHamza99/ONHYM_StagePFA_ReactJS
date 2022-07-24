@@ -14,23 +14,23 @@ const AllDemandesSi = () => {
 
     const [state, setState] = useState("")
 
-    const download = (id,etat) => {
-        var filename = etat=== -1 ? id+".pdf" : etat===0 ? id+"ManagerValidation.pdf" : id+"DsiValidation.pdf"
+    const download = (id, etat) => {
+        var filename = etat === -1 ? id + ".pdf" : etat === 0 ? id + "ManagerValidation.pdf" : id + "DsiValidation.pdf"
         var config = {
-            responseType:'blob',
+            responseType: 'blob',
             headers: { "Authorization": "Bearer " + localStorage.getItem("access_token") }
         }
-        axios.get("http://localhost:8000/file/"+filename, config)
-        .then((response) => {
-            let url = window.URL.createObjectURL(response.data)
-            let a = document.createElement('a')
-            a.href = url
-            a.download = filename
-            a.click()
-        })
-        .catch((error)=>{
-            console.log(error);
-        })
+        axios.get("http://localhost:8000/file/" + filename, config)
+            .then((response) => {
+                let url = window.URL.createObjectURL(response.data)
+                let a = document.createElement('a')
+                a.href = url
+                a.download = filename
+                a.click()
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     if (!localStorage.getItem("isAuth")) {
@@ -48,40 +48,44 @@ const AllDemandesSi = () => {
         </Alert>)
     }
     const renderDemandes = demandesSI.data
-    .filter((demande) => state.length > 0 ? demande.idDemandeServiceSi.startsWith(state) || demande.demandeur.username.startsWith(state) || demande.dateDemande.startsWith(state) : demande)
-    .map((demande) => {
-        return (
-            <tr key={demande.idDemandeServiceSi}>
-                <th>{demande.idDemandeServiceSi}</th>
-                <td>{demande.demandeur.username}</td>
-                <td>{demande.societe}</td>
-                <td>{demande.serviceDemande}</td>
-                <td>{demande.dateDemande}</td>
-                <td>
-                    {demande.etatDemande === -1 && !demande.refuser ? <Badge color='warning'>en attente</Badge>
-                        : demande.etatDemande === 0 ? <Badge color='info'>en attente</Badge>
-                            : demande.etatDemande === 1 ? <Badge color='success'>validé</Badge>
-                                : demande.refuser ? <Badge color='danger'>refusé</Badge> : <></>
-                    }
-                </td>
-                <td>{demande.manager ? demande.manager.username : <>-</>}</td>
-                <td>{demande.dsi ? demande.dsi.username : <>-</>}</td>
-                <td><Link to={`/demandesSI/details/${demande.idDemandeServiceSi}`}><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></Link></td>
-                <td>
-                    <Button color='primary' 
-                    size='sm' disabled={demande.refuser ? true : false} 
-                    onClick={() => download(demande.idDemandeServiceSi,demande.etatDemande) }> 
-                        <i class="fa fa-download" aria-hidden="true"></i>
-                    </Button>
-                </td>
-            </tr>
-        )
-    })
+        .filter((demande) => state.length > 0 ?
+            demande.idDemandeServiceSi.toLowerCase().startsWith(state.toLowerCase())
+            || demande.demandeur.username.toLowerCase().startsWith(state.toLowerCase())
+            || demande.societe.toLowerCase().startsWith(state.toLowerCase())
+            || demande.dateDemande.startsWith(state) : demande)
+        .map((demande) => {
+            return (
+                <tr key={demande.idDemandeServiceSi}>
+                    <th>{demande.idDemandeServiceSi}</th>
+                    <td>{demande.demandeur.username}</td>
+                    <td>{demande.societe}</td>
+                    <td>{demande.serviceDemande}</td>
+                    <td>{demande.dateDemande}</td>
+                    <td>
+                        {demande.etatDemande === -1 && !demande.refuser ? <Badge color='warning'>en attente</Badge>
+                            : demande.etatDemande === 0 ? <Badge color='info'>en attente</Badge>
+                                : demande.etatDemande === 1 ? <Badge color='success'>validé</Badge>
+                                    : demande.refuser ? <Badge color='danger'>refusé</Badge> : <></>
+                        }
+                    </td>
+                    <td>{demande.manager ? demande.manager.username : <>-</>}</td>
+                    <td>{demande.dsi ? demande.dsi.username : <>-</>}</td>
+                    <td><Link to={`/demandesSI/details/${demande.idDemandeServiceSi}`}><i class="fa fa-info-circle fa-2x" aria-hidden="true"></i></Link></td>
+                    <td>
+                        <Button color='primary'
+                            size='sm' disabled={demande.refuser ? true : false}
+                            onClick={() => download(demande.idDemandeServiceSi, demande.etatDemande)}>
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </Button>
+                    </td>
+                </tr>
+            )
+        })
     return (
         <div className='container'>
-            <Input style={{width:'36.5%',marginTop:'5px'}} type="search" name="search" id='search'
+            <Input style={{ width: '36.5%', marginTop: '5px' }} type="search" name="search" id='search'
                 value={state} onChange={(e) => setState(e.target.value)}
-                placeholder='chercher une demande par date/nom/id ...' />
+                placeholder='chercher une demande par date/nom/id/societe ...' />
             <Table bordered>
                 <thead>
                     <tr>

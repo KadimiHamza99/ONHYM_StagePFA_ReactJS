@@ -95,7 +95,9 @@ const UserDemandesSI = () => {
 
     const renderDemandes = demandesSI.data
         .filter((demande) => demande.demandeur.username === localStorage.getItem('username'))
-        .filter((demande) => state.length > 0 ? demande.idDemandeServiceSi.startsWith(state) || demande.demandeur.username.startsWith(state) || demande.dateDemande.startsWith(state) : demande)
+        .filter((demande) => state.length > 0 ? demande.idDemandeServiceSi.startsWith(state)
+            || demande.demandeur.username.toLowerCase().startsWith(state.toLowerCase())
+            || demande.dateDemande.startsWith(state) : demande)
         .map((demande) => {
             return (
                 <tr key={demande.idDemandeServiceSi}>

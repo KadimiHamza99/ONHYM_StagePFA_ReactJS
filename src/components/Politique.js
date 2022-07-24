@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, CardFooter, CardText, CardTitle, Col } from 'reactstrap';
+import { Card, CardFooter, CardText, CardTitle, Col } from 'reactstrap';
 
 const Politique = () => {
     return (

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Nav, Navbar, NavbarBrand, NavItem, DropdownItem, DropdownMenu, DropdownToggle, NavbarText, UncontrolledDropdown, NavLink, Button } from 'reactstrap';
+import { Nav, Navbar, NavbarBrand, NavItem, DropdownItem, DropdownMenu, DropdownToggle, NavbarText, UncontrolledDropdown, NavLink } from 'reactstrap';
 import { LoginContext } from '../context/LoginContext';
 
 const Header = () => {

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Alert, Badge, Button, Form, FormGroup, Input, Label, Modal, ModalBody, ModalHeader, Table } from 'reactstrap';
+import { Alert, Badge, Button, Form, FormGroup, Input, Modal, ModalBody, ModalHeader, Table } from 'reactstrap';
 import { DataContext } from '../context/DataContext';
 import Loading from './Loading';
 import LoginForm from './LoginForm';
@@ -93,7 +93,8 @@ const UserDemandesAM = () => {
         .filter((demande) => demande.demandeur.username === localStorage.getItem('username'))
         .filter((demande) => state.length > 0 ?
             demande.idDemandeAccesMessagerie.startsWith(state)
-            || demande.demandeur.username.startsWith(state) || demande.dateDemande.startsWith(state) : demande)
+            || demande.demandeur.username.toLowerCase().startsWith(state.toLowerCase())
+            || demande.dateDemande.startsWith(state) : demande)
         .map((demande) => {
             return (
                 <tr key={demande.idDemandeAccesMessagerie}>

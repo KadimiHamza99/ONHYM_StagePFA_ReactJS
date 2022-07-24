@@ -43,9 +43,11 @@ const AllDemandesAm = () => {
     }
 
     const renderDemandes = demandesAM.data
-        .filter((demande) => state.length > 0 ? 
-        demande.idDemandeAccesMessagerie.startsWith(state) 
-        || demande.demandeur.username.startsWith(state) || demande.dateDemande.startsWith(state) : demande)
+        .filter((demande) => state.length > 0 ?
+            demande.idDemandeAccesMessagerie.startsWith(state)
+            || demande.demandeur.username.toLowerCase().startsWith(state.toLowerCase())
+            || demande.matricule.toLowerCase().startsWith(state.toLowerCase())
+            || demande.dateDemande.startsWith(state) : demande)
         .map((demande) => {
             return (
                 <tr key={demande.idDemandeAccesMessagerie}>
@@ -77,9 +79,9 @@ const AllDemandesAm = () => {
     return (
         <div className='container'>
 
-            <Input style={{width:'43%',marginTop:'5px'}} type="search" name="search" id='search'
+            <Input style={{ width: '43%', marginTop: '5px' }} type="search" name="search" id='search'
                 value={state} onChange={(e) => setState(e.target.value)}
-                placeholder='chercher une demande par date/nom/id ...' />
+                placeholder='chercher une demande par date/nom/id/matricule ...' />
             <Table bordered >
                 <thead>
                     <tr>
