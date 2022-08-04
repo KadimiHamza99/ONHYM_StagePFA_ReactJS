@@ -34,7 +34,6 @@ class Main extends Component {
                         {
                             !localStorage.getItem('roles') ?
                                 localStorage.setItem("roles", JSON.stringify([])) : null
-                    
                         }
                         <Routes>
                             <Route exact path="/" element={<Home />} />

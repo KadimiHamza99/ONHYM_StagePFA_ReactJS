@@ -10,3 +10,7 @@
 Table{
     background-color: #F8F9FA;
 }
+body{
+    background-image: url(./Assets/background_login.jpg);
+    background-size: cover;
+}

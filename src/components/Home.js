@@ -23,9 +23,6 @@ const Home = () => {
                             Bonjour Mr./Mme. {localStorage.getItem('username')} ,Cet espace est confidentiel et reservé aux employés de l'ONHYM .
                         </p>
                     </CardText>
-                    <CardFooter className="text-center p-2 footer">
-                        © 2022 Copyright : <cite>KADIMI Hamza stagiaire</cite>
-                    </CardFooter>
                 </Card>
             </Col>
 

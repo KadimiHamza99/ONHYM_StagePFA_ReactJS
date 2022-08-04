@@ -7,9 +7,9 @@ const Header = () => {
 
     return (
         <div>
-            <Navbar color="light" expand="md" light>
+            <Navbar color="light" expand="md" light style={{opacity:'90%'}}>
                 <NavbarBrand href="/">
-                    <img src="/images/logo.png" height="70" width="100" alt="ONHYM LOGO" />
+                    <img src="/images/logo.png" height="70" width="200" alt="ONHYM LOGO" />
                 </NavbarBrand>
 
                 <Nav className="me-auto" navbar style={{ marginLeft: '10em' }}>

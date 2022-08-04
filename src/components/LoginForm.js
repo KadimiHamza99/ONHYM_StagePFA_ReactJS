@@ -25,19 +25,16 @@ const LoginForm = () => {
     style={{ width: '30rem', margin: '3em ' }}
   >
     <CardBody>
-      <CardTitle tag="h5">
-        S'Authentifier
-      </CardTitle>
       <CardText>
       <Form onSubmit={handleLogin}>
                 <FormGroup>
-                    <Label htmlFor="username">Username</Label>
+                    <Label htmlFor="username">Login</Label>
                         <Input type="text" id='username'
                                 name='username' required
                                 value={username} onChange={(e)=>setUsername(e.target.value)}/>
                 </FormGroup>
                 <FormGroup>
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password">Mot de passe</Label>
                     <Input type="password" id='password'
                             name='password' required
                             value={password} onChange={(e)=>setPassword(e.target.value)}/>
@@ -57,9 +54,6 @@ const LoginForm = () => {
       </CardText>
     </CardBody>
   </Card>
-  <picture className="logo">
-        <img width="200" src="onhym-logo.png" alt="" />
-      </picture>
             
         </div>
     );
