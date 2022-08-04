@@ -9,7 +9,7 @@ const Home = () => {
     }
     return (
         <div className='container'>
-            
+
             <Col sm="12">
                 <Card body style={{ marginTop: '3em' }}>
                     <CardTitle tag="h3">

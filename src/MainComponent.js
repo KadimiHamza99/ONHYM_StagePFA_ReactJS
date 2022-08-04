@@ -23,12 +23,19 @@ import Politique from "./components/Politique";
 
 class Main extends Component {
 
+
+
     render() {
         return (
             <LoginContextProvider>
                 <DataContextProvider>
                     <BrowserRouter>
                         <Header />
+                        {
+                            !localStorage.getItem('roles') ?
+                                localStorage.setItem("roles", JSON.stringify([])) : null
+                    
+                        }
                         <Routes>
                             <Route exact path="/" element={<Home />} />
 
@@ -38,21 +45,38 @@ class Main extends Component {
                             <Route exact path='/demandesAM/details/:demandeId' element={<DemandeAMDetails />} />
                             <Route exact path='/demandesSI/details/:demandeId' element={<DemandeSIDetails />} />
 
-                            <Route exact path="/validation/am" element={<ValidationAM />}/>
-                            <Route exact path="/validation/si" element={<ValidationSI />}/>
+                            {
+                                localStorage.getItem('roles').includes("DSI")
+                                    || localStorage.getItem('roles').includes("DPI")
+                                    || localStorage.getItem('roles').includes("MANAGER") ?
+                                    <>
+                                        <Route exact path="/validation/am" element={<ValidationAM />} />
+                                        <Route exact path="/validation/si" element={<ValidationSI />} />
+                                    </>
+                                    : <></>
+                            }
+                            {
+                                localStorage.getItem("roles").includes("DEMANDEUR") ?
+                                    <>
+                                        <Route exact path="/demandesAM" element={<UserDemandesAM />} />
+                                        <Route exact path="/demandesSI" element={<UserDemandesSI />} />
+                                    </>
+                                    : <></>
+                            }
 
-                            <Route exact path="/refus/am" element={<RefusAM/>}/>
-                            <Route exact path="/refus/si" element={<RefusSI/>}/>
+                            {
+                                localStorage.getItem('roles').includes("ADMIN") ? <>
+                                    <Route exact path="/admin/users" element={<Users />} />
+                                    <Route path='/admin/users/:userId' element={<UsersUpdate />}></Route>
+                                </> : <></>
+                            }
 
-                            <Route exact path="/demandesAM" element={<UserDemandesAM />}/>
-                            <Route exact path="/demandesSI" element={<UserDemandesSI />}/>
-
+                            <Route exact path="/refus/am" element={<RefusAM />} />
+                            <Route exact path="/refus/si" element={<RefusSI />} />
 
                             <Route exact path="/configuration" element={<ChangePassword />} />
-                            <Route exact path="/admin/users" element={<Users />} />
-                            <Route path='/admin/users/:userId' element={<UsersUpdate />}></Route>
 
-                            <Route exact path="/politique" element={<Politique />}/>
+                            <Route exact path="/politique" element={<Politique />} />
 
                             <Route path="/*" element={<Error />} />
                         </Routes>
