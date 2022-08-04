@@ -7,13 +7,14 @@ const LoginForm = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
-    const {login,errMsg} = useContext(LoginContext)
+    const {login,errMsg,logout} = useContext(LoginContext)
 
 
     const handleLogin = (e) => {
         e.preventDefault()
         login(username,password)
     }
+
 
     return (
         <div className="container grid">
@@ -41,12 +42,14 @@ const LoginForm = () => {
                             name='password' required
                             value={password} onChange={(e)=>setPassword(e.target.value)}/>
                 </FormGroup>
-                <Button type='submit' color='primary' sm>Se connecter</Button>
+                <Button type='submit' color='primary' size='sm' style={{marginBottom:'10px'}}>Se connecter</Button>
             </Form>
             {
             errMsg.length>0 ? 
                 <Alert color="danger">
-                    {errMsg}
+                    {errMsg} 
+                    <hr/>
+                    <Button size='sm' color='danger' onClick={logout}>Fix problems</Button>
                 </Alert> 
                 : 
                 <></>

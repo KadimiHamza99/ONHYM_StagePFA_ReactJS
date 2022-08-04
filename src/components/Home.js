@@ -3,11 +3,13 @@ import { Card, CardFooter, CardSubtitle, CardText, CardTitle, Col } from 'reacts
 import LoginForm from './LoginForm';
 
 const Home = () => {
+
     if (!localStorage.getItem("isAuth")) {
         return <LoginForm />
     }
     return (
         <div className='container'>
+            
             <Col sm="12">
                 <Card body style={{ marginTop: '3em' }}>
                     <CardTitle tag="h3">

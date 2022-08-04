@@ -12,9 +12,6 @@ const RefusSI = () => {
     if (!localStorage.getItem("isAuth")) {
         return <LoginForm />
     }
-    if (demandesSI.data.length === 0) {
-        return <div className='container'>Pas de demandes pour services SI pour le moment</div>
-    }
     if (demandesSI.isLoading) {
         return <Loading />
     }
